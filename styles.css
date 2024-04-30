@@ -6,3 +6,113 @@ dark-blue - #134d71;
 white - #ffffff;
 black - #000000;
 */
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  font-family: "Quicksand", sans-serif;
+  text-align: center;
+}
+
+html {
+  background: linear-gradient(to bottom, #134d71, #f7e4bf);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2 {
+  color: #ffffff;
+}
+
+h1 {
+    margin: 25px;
+}
+
+h2 {
+    margin: 10px;
+}
+
+.legend-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
+}
+
+main {
+  min-height: calc(100vh - 40px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-bottom: 25px;
+}
+
+.form-section,
+.message-section {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+.message-form {
+  max-width: 600px;
+}
+
+.message-container {
+  max-width: 800px;
+  min-width: 100px;
+}
+
+.message-form,
+.message-container {
+  background: #ffffff;
+  border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 10px;
+}
+
+.radio-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px 0;
+  }
+
+
+.radio-buttons label {
+  font-style: italic;
+}
+
+button[type="submit"] {
+  background-color: #134d71;
+  color: #ffffff;
+  border: none;
+  padding: 3px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+button[type="submit"]:hover {
+  background-color: #002244;
+}
+
+.meditation-icon {
+  width: 65px;
+  margin: 30px auto;
+}

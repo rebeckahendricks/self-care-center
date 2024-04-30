@@ -1,10 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <title>Self Care Center</title>
   </head>
   <body>
+    <header>
+      <h1>✨ Self Care Center ✨</h1>
+    </header>
+
+    <main>
+      <section class="form-section">
+        <h2>Which type of message?</h2>
+        <form>
+          <fieldset class="message-form">
+            <legend class="legend-hidden">Message Options</legend>
+            <div class="radio-buttons">
+              <label for="affirmation">
+                <input type="radio" id="affirmation" name="message" value="affirmation">
+                affirmation
+              </label>
+              <label for="mantra">
+                <input type="radio" id="mantra" name="message" value="mantra">
+                mantra
+              </label>
+            </div>
+            <button type="submit">Receive Message</button>
+          </fieldset>
+        </form>
+      </section>
+
+      <section class="message-section">
+        <div class="message-container">
+          <img class="meditation-icon" src="./assets/meditate.svg" alt="Meditation Icon">
+        </div>
+      </section>
+    </main>
   
     <script type="text/javascript" src="main.js"></script>
   </body>
