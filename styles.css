@@ -33,11 +33,15 @@ h2 {
 }
 
 h1 {
-    margin: 25px;
+  margin: 25px;
 }
 
 h2 {
-    margin: 10px;
+  margin: 10px;
+}
+
+h3 {
+    font-weight: normal;
 }
 
 .legend-hidden {
@@ -75,6 +79,10 @@ main {
 .message-container {
   max-width: 800px;
   min-width: 100px;
+  min-height: 130px;
+  display: flex;
+align-items: center;
+    justify-content: center;
 }
 
 .message-form,
@@ -87,12 +95,11 @@ main {
 }
 
 .radio-buttons {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 10px 0;
-  }
-
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px 0;
+}
 
 .radio-buttons label {
   font-style: italic;
@@ -115,4 +122,8 @@ button[type="submit"]:hover {
 .meditation-icon {
   width: 65px;
   margin: 30px auto;
+}
+
+.hidden {
+  display: none;
 }

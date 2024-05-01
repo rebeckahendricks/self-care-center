@@ -15,7 +15,7 @@
     <main>
       <section class="form-section">
         <h2>Which type of message?</h2>
-        <form>
+        <form class="form">
           <fieldset class="message-form">
             <legend class="legend-hidden">Message Options</legend>
             <div class="radio-buttons">
@@ -33,9 +33,15 @@
         </form>
       </section>
 
-      <section class="message-section">
+      <section id="icon" class="message-section">
         <div class="message-container">
           <img class="meditation-icon" src="./assets/meditate.svg" alt="Meditation Icon">
+        </div>
+      </section>
+
+      <section id="message" class="message-section hidden">
+        <div class="message-container">
+          <h3 class="display-message">Test Message</h3>
         </div>
       </section>
     </main>
