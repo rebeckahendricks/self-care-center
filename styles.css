@@ -41,7 +41,7 @@ h2 {
 }
 
 h3 {
-    font-weight: normal;
+  font-weight: normal;
 }
 
 .legend-hidden {
@@ -81,8 +81,8 @@ main {
   min-width: 100px;
   min-height: 130px;
   display: flex;
-align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .message-form,
@@ -105,18 +105,25 @@ align-items: center;
   font-style: italic;
 }
 
-button[type="submit"] {
-  background-color: #134d71;
-  color: #ffffff;
+#submitButton {
+  background-color: #78a7c6;
+  color: #000000;
   border: none;
   padding: 3px 20px;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: not-allowed;
+  transition: background-color 0.3s, color 0.3s;
   margin: 5px 0;
 }
 
-button[type="submit"]:hover {
+#submitButton:enabled:hover {
   background-color: #002244;
+}
+
+#submitButton:enabled {
+  background-color: #134d71;
+  color: #ffffff;
+  cursor: pointer;
 }
 
 .meditation-icon {

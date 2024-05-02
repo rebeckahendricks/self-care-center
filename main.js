@@ -1,8 +1,12 @@
+// DOM elements:
 const quoteForm = document.querySelector('.form')
 const message = document.getElementById('message')
 const icon = document.getElementById('icon')
 const displayMessage = document.querySelector('.display-message')
+const submitButton = document.getElementById('submitButton');
+const radioButtons = document.querySelectorAll('input[name="message"]');
 
+// Data:
 const messageData = {
     mantra: {
         type: "mantra",
@@ -16,26 +20,36 @@ const messageData = {
 
 var currentMessage;
 
+// Event Listeners:
+radioButtons.forEach(button => {
+    button.addEventListener('change', function() {
+        if (this.checked) {
+            submitButton.disabled = false;
+        }
+    });
+});
+
 quoteForm.addEventListener('submit', function(event) {
     event.preventDefault();
     const selectedRadio = document.querySelector('input[name="message"]:checked');
 
     if (selectedRadio) {
-        icon.classList.add('hidden')
-        message.classList.remove('hidden')
-
         const messageType = selectedRadio.value;
-
         if (messageData[messageType]) {
-            displayRandomMessage(messageData[messageType].messages);
+            const messageArray = messageData[messageType].messages
+            displayRandomMessage(messageArray);
         }
     } else {
-        console.log('No message type selected.');
+        event.preventDefault();
     }
 })
 
-function displayRandomMessage(messages) {
-    const randomIndex = Math.floor(Math.random() * messages.length);
-    currentMessage = messages[randomIndex];
+// Helper Functions:
+function displayRandomMessage(messageArray) {
+    const randomIndex = Math.floor(Math.random() * messageArray.length);
+    currentMessage = messageArray[randomIndex];
+
+    icon.classList.add('hidden')
+    message.classList.remove('hidden')
     displayMessage.innerText = currentMessage
 }
