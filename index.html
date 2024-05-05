@@ -16,23 +16,23 @@
     </header>
 
     <main>
-      <section class="form-section">
+      <section id="message-type-display" class="message-section">
         <h2>Which type of message?</h2>
-        <form class="form">
-          <fieldset class="message-form">
+        <form id="message-type-form" class="form">
+          <fieldset id="message-type-fieldset" class="message-form">
             <legend class="legend-hidden">Display Message Options</legend>
             <div class="radio-buttons">
               <label for="affirmation">
                 <input
                   type="radio"
                   id="affirmation"
-                  name="message"
+                  name="message-type"
                   value="affirmation"
                 />
                 affirmation
               </label>
               <label for="mantra">
-                <input type="radio" id="mantra" name="message" value="mantra" />
+                <input type="radio" id="mantra" name="message-type" value="mantra" />
                 mantra
               </label>
             </div>
@@ -44,7 +44,7 @@
         </form>
       </section>
 
-      <section id="icon" class="message-section">
+      <section id="icon-display" class="message-section">
         <div class="message-container">
           <img
             class="meditation-icon"
@@ -54,16 +54,16 @@
         </div>
       </section>
 
-      <section id="message" class="message-section hidden">
+      <section id="message-display" class="message-section hidden">
         <div class="message-container">
-          <h3 class="display-message"></h3>
+          <h3 class="message-text"></h3>
         </div>
       </section>
 
-      <section id="add-message" class="message-section hidden">
+      <section id="add-message-display" class="message-section hidden">
         <div class="message-container">
-          <form class="form">
-            <fieldset class="add-message-form">
+          <form id="add-message-form" class="form">
+            <fieldset id="add-message-fieldset" class="message-form">
               <legend class="legend-hidden">Add Message Options</legend>
             </fieldset>
           </form>

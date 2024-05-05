@@ -65,14 +65,13 @@ main {
   padding-bottom: 25px;
 }
 
-.form-section,
 .message-section {
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 10px;
 }
 
-.message-form {
+#message-type-fieldset {
   max-width: 600px;
 }
 

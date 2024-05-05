@@ -1,11 +1,14 @@
 // DOM elements:
-const quoteForm = document.querySelector('.form');
-const message = document.getElementById('message');
-const icon = document.getElementById('icon');
-const displayMessage = document.querySelector('.display-message');
-const addMessage = document.querySelector('add-message');
+const messageText = document.querySelector('.message-text');
 
-const radioButtons = document.querySelectorAll('input[name="message"]');
+const messageDisplay = document.getElementById('message-display');
+const iconDisplay = document.getElementById('icon-display');
+const addMessageDisplay = document.getElementById('add-message-display');
+
+const messageTypeForm = document.getElementById('message-type-form');
+const addMessageForm = document.getElementById('add-message-form')
+
+const radioButtons = document.querySelectorAll('input[name="message-type"]');
 const submitButton = document.getElementById('submitButton');
 const clearButton = document.getElementById('clearButton');
 const addMessageButton = document.getElementById('addMessageButton');
@@ -37,16 +40,16 @@ clearButton.addEventListener('click', function() {
     clearMessage()
 });
 
-quoteForm.addEventListener('submit', function(event) {
+messageTypeForm.addEventListener('submit', function(event) {
     event.preventDefault();
-    const selectedRadio = document.querySelector('input[name="message"]:checked');
+    const selectedType = document.querySelector('input[name="message-type"]:checked');
 
-    if (selectedRadio) {
-        const messageType = selectedRadio.value;
+    if (selectedType) {
+        const messageType = selectedType.value;
         if (messageData[messageType]) {
             const messageArray = messageData[messageType].messages
-            displayRandomMessage(messageArray);
-            clearButton.disabled = false;
+            randomizeCurrentMessage(messageArray);
+            showMessageDisplay()
         }
     } else {
         event.preventDefault();
@@ -57,13 +60,23 @@ addMessageButton.addEventListener('click', function() {
 });
 
 // Helper Functions:
-function displayRandomMessage(messageArray) {
+function randomizeCurrentMessage(messageArray) {
     const randomIndex = Math.floor(Math.random() * messageArray.length);
     currentMessage = messageArray[randomIndex];
+}
 
-    icon.classList.add('hidden')
-    message.classList.remove('hidden')
-    displayMessage.innerText = currentMessage
+function showMessageDisplay() {
+    messageText.innerText = currentMessage
+
+    iconDisplay.classList.add('hidden')
+    messageDisplay.classList.remove('hidden')
+    
+    clearButton.disabled = false;
+}
+
+function showIconDisplay() {
+    iconDisplay.classList.remove('hidden')
+    messageDisplay.classList.add('hidden')
 }
 
 function clearMessage() {
@@ -74,6 +87,5 @@ function clearMessage() {
     submitButton.disabled = true;
     clearButton.disabled = true;
 
-    icon.classList.remove('hidden')
-    message.classList.add('hidden')
+    showIconDisplay()
 }
