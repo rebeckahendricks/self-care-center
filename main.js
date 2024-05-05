@@ -1,10 +1,11 @@
 // DOM elements:
-const quoteForm = document.querySelector('.form')
-const message = document.getElementById('message')
-const icon = document.getElementById('icon')
-const displayMessage = document.querySelector('.display-message')
-const submitButton = document.getElementById('submitButton');
+const quoteForm = document.querySelector('.form');
+const message = document.getElementById('message');
+const icon = document.getElementById('icon');
+const displayMessage = document.querySelector('.display-message');
 const radioButtons = document.querySelectorAll('input[name="message"]');
+const submitButton = document.getElementById('submitButton');
+const clearButton = document.getElementById('clearButton');
 
 // Data:
 const messageData = {
@@ -29,6 +30,10 @@ radioButtons.forEach(button => {
     });
 });
 
+clearButton.addEventListener('click', function() {
+    clearMessage()
+});
+
 quoteForm.addEventListener('submit', function(event) {
     event.preventDefault();
     const selectedRadio = document.querySelector('input[name="message"]:checked');
@@ -38,6 +43,7 @@ quoteForm.addEventListener('submit', function(event) {
         if (messageData[messageType]) {
             const messageArray = messageData[messageType].messages
             displayRandomMessage(messageArray);
+            clearButton.disabled = false;
         }
     } else {
         event.preventDefault();
@@ -52,4 +58,16 @@ function displayRandomMessage(messageArray) {
     icon.classList.add('hidden')
     message.classList.remove('hidden')
     displayMessage.innerText = currentMessage
+}
+
+function clearMessage() {
+    radioButtons.forEach(button => {
+        button.checked = false;
+    });
+
+    submitButton.disabled = true;
+    clearButton.disabled = true;
+
+    icon.classList.remove('hidden')
+    message.classList.add('hidden')
 }

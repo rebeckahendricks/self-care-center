@@ -41,7 +41,7 @@ h2 {
 }
 
 h3 {
-  font-weight: normal;
+    font-weight: normal;
 }
 
 .legend-hidden {
@@ -81,8 +81,8 @@ main {
   min-width: 100px;
   min-height: 130px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+align-items: center;
+    justify-content: center;
 }
 
 .message-form,
@@ -105,7 +105,7 @@ main {
   font-style: italic;
 }
 
-#submitButton {
+.message-form button {
   background-color: #78a7c6;
   color: #000000;
   border: none;
@@ -116,11 +116,11 @@ main {
   margin: 5px 0;
 }
 
-#submitButton:enabled:hover {
+.message-form button:enabled:hover {
   background-color: #002244;
 }
 
-#submitButton:enabled {
+.message-form button:enabled {
   background-color: #134d71;
   color: #ffffff;
   cursor: pointer;
