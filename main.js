@@ -3,9 +3,12 @@ const quoteForm = document.querySelector('.form');
 const message = document.getElementById('message');
 const icon = document.getElementById('icon');
 const displayMessage = document.querySelector('.display-message');
+const addMessage = document.querySelector('add-message');
+
 const radioButtons = document.querySelectorAll('input[name="message"]');
 const submitButton = document.getElementById('submitButton');
 const clearButton = document.getElementById('clearButton');
+const addMessageButton = document.getElementById('addMessageButton');
 
 // Data:
 const messageData = {
@@ -49,6 +52,9 @@ quoteForm.addEventListener('submit', function(event) {
         event.preventDefault();
     }
 })
+
+addMessageButton.addEventListener('click', function() {
+});
 
 // Helper Functions:
 function displayRandomMessage(messageArray) {
