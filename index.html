@@ -19,9 +19,9 @@
       <section id="message-type-display" class="message-section">
         <h2>Which type of message?</h2>
         <form id="message-type-form" class="form">
-          <fieldset id="message-type-fieldset" class="message-form">
+          <fieldset id="message-type-fieldset" class="message-fieldset">
             <legend class="legend-hidden">Display Message Options</legend>
-            <div class="radio-buttons">
+            <div class="radio-buttons message-form-row">
               <label for="affirmation">
                 <input
                   type="radio"
@@ -32,14 +32,23 @@
                 affirmation
               </label>
               <label for="mantra">
-                <input type="radio" id="mantra" name="message-type" value="mantra" />
+                <input
+                  type="radio"
+                  id="mantra"
+                  name="message-type"
+                  value="mantra"
+                />
                 mantra
               </label>
             </div>
-            <button type="submit" id="submitButton" disabled>
-              Receive Message
-            </button>
-            <button type="button" id="clearButton" disabled>Clear</button>
+            <div class="message-form-row">
+              <div class="button-box">
+                <button type="submit" id="submitButton" disabled>
+                  Receive Message
+                </button>
+                <button type="button" id="clearButton" disabled>Clear</button>
+              </div>
+            </div>
           </fieldset>
         </form>
       </section>
@@ -56,15 +65,47 @@
 
       <section id="message-display" class="message-section hidden">
         <div class="message-container">
-          <h3 class="message-text"></h3>
+          <p class="message-text"></p>
         </div>
       </section>
 
       <section id="add-message-display" class="message-section hidden">
         <div class="message-container">
           <form id="add-message-form" class="form">
-            <fieldset id="add-message-fieldset" class="message-form">
+            <fieldset id="add-message-fieldset" class="message-fieldset">
               <legend class="legend-hidden">Add Message Options</legend>
+              <h3 class="add-message-title">Add a New Message</h3>
+              <div class="message-form-row">
+                <label for="messageType">Message Type:</label>
+                <select id="messageType" name="messageType">
+                  <option value="mantra">Mantra</option>
+                  <option value="affirmation">Affirmation</option>
+                  <option value="other">Other (please specify)</option>
+                </select>
+                <input
+                  type="text"
+                  id="otherType"
+                  name="otherType"
+                  placeholder="Specify type"
+                  style="display: none"
+                />
+              </div>
+              <div class="message-form-row">
+                <label for="messageText">Message Text:</label>
+                <input
+                  type="text"
+                  id="messageText"
+                  name="messageText"
+                  required
+                  placeholder="Enter your message here"
+                />
+              </div>
+
+              <div class="message-form-row">
+                <div class="button-box">
+                  <button type="submit">Submit</button>
+                </div>
+              </div>
             </fieldset>
           </form>
         </div>

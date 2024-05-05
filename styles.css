@@ -36,24 +36,20 @@ h1 {
   margin: 25px;
 }
 
-h2 {
-  margin: 10px;
+h2, h3 {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  align-self: center;
 }
 
 h3 {
-  font-weight: normal;
+  color: #134d71;
 }
 
-.legend-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-  white-space: nowrap;
+.message-text {
+  font-size: 30px;
+  padding-bottom: 10px;
+  margin: 0px;
 }
 
 main {
@@ -75,36 +71,65 @@ main {
   max-width: 600px;
 }
 
+#add-message-fieldset {
+  padding: 0px;
+}
+
+.form {
+  flex: 1;
+}
+
+.message-fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.message-form-row {
+  margin: 5px 0px;
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-box {
+  margin: 5px 0px;
+  width: 100%;
+}
+
 .message-container {
   max-width: 800px;
   min-width: 100px;
-  min-height: 130px;
+  min-height: 170px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.message-form,
+.message-fieldset,
 .message-container {
+  color: #000000;
   background: #ffffff;
   border-radius: 8px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 10px;
+  padding-top: 10px;
+  padding-bottom: 0;
 }
 
 .radio-buttons {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  padding: 10px 0;
 }
 
 .radio-buttons label {
   font-style: italic;
 }
 
-.message-form button {
+.message-fieldset button {
   background-color: #78a7c6;
   color: #000000;
   border: none;
@@ -113,16 +138,27 @@ main {
   cursor: not-allowed;
   transition: background-color 0.3s, color 0.3s;
   margin: 5px 0;
+  font-weight: 500;
+  font-size: medium;
 }
 
-.message-form button:enabled:hover {
+.message-fieldset button:enabled:hover {
   background-color: #002244;
 }
 
-.message-form button:enabled {
+.message-fieldset button:enabled {
   background-color: #134d71;
   color: #ffffff;
   cursor: pointer;
+}
+
+select {
+  display: block;
+  width: 20%;
+}
+
+input[type="text"] {
+  width: 60%;
 }
 
 .meditation-icon {
@@ -132,6 +168,18 @@ main {
 
 .hidden {
   display: none;
+}
+
+.legend-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
 }
 
 .fab {

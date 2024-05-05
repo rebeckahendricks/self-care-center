@@ -57,6 +57,7 @@ messageTypeForm.addEventListener('submit', function(event) {
 })
 
 addMessageButton.addEventListener('click', function() {
+    showAddMessageDisplay()
 });
 
 // Helper Functions:
@@ -67,15 +68,23 @@ function randomizeCurrentMessage(messageArray) {
 
 function showMessageDisplay() {
     messageText.innerText = currentMessage
-
-    iconDisplay.classList.add('hidden')
-    messageDisplay.classList.remove('hidden')
     
+    messageDisplay.classList.remove('hidden')
+    iconDisplay.classList.add('hidden')
+    addMessageDisplay.classList.add('hidden')
+
     clearButton.disabled = false;
 }
 
 function showIconDisplay() {
     iconDisplay.classList.remove('hidden')
+    messageDisplay.classList.add('hidden')
+    addMessageDisplay.classList.add('hidden')
+}
+
+function showAddMessageDisplay() {
+    addMessageDisplay.classList.remove('hidden')
+    iconDisplay.classList.add('hidden')
     messageDisplay.classList.add('hidden')
 }
 
