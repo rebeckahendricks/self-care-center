@@ -13,6 +13,8 @@ const submitButton = document.getElementById('submitButton');
 const clearButton = document.getElementById('clearButton');
 const addMessageButton = document.getElementById('addMessageButton');
 
+const messageTypeSelect = document.getElementById('messageTypeSelect');
+
 // Data:
 const messageData = {
     mantra: {
@@ -60,6 +62,34 @@ addMessageButton.addEventListener('click', function() {
     showAddMessageDisplay()
 });
 
+messageTypeSelect.addEventListener('change', function() {
+    var otherTypeInput = document.getElementById('otherType');
+
+    if (this.value === 'other') {
+        otherTypeInput.style.display = 'block';
+    } else {
+        otherTypeInput.style.display = 'none';
+    }
+});
+
+addMessageForm.addEventListener('submit', function(event) {
+    event.preventDefault()
+
+    const messageType = document.getElementById('messageTypeSelect').value;
+
+    let type;
+    if (messageType === 'other') {
+        const otherTypeInput = document.getElementById('otherType');
+        type = otherTypeInput.value;
+    } else {
+        type = messageType;
+    }
+
+    const messageText = document.getElementById('messageText').value;
+
+    createMessage(type, messageText)
+});
+
 // Helper Functions:
 function randomizeCurrentMessage(messageArray) {
     const randomIndex = Math.floor(Math.random() * messageArray.length);
@@ -97,4 +127,9 @@ function clearMessage() {
     clearButton.disabled = true;
 
     showIconDisplay()
+}
+
+function createMessage(type, message) {
+    console.log('message type:', type);
+    console.log('message:', message);
 }

@@ -70,14 +70,14 @@
       </section>
 
       <section id="add-message-display" class="message-section hidden">
-        <div class="message-container">
-          <form id="add-message-form" class="form">
-            <fieldset id="add-message-fieldset" class="message-fieldset">
-              <legend class="legend-hidden">Add Message Options</legend>
-              <h3 class="add-message-title">Add a New Message</h3>
-              <div class="message-form-row">
-                <label for="messageType">Message Type:</label>
-                <select id="messageType" name="messageType">
+        <form id="add-message-form" class="form">
+          <fieldset id="add-message-fieldset" class="message-fieldset">
+            <legend class="legend-hidden">Add Message Options</legend>
+            <h3 class="add-message-title">Add a New Message</h3>
+            <div class="message-form-row">
+              <label for="messageType">Message Type:</label>
+              <div class="message-type-input">
+                <select id="messageTypeSelect" name="messageType">
                   <option value="mantra">Mantra</option>
                   <option value="affirmation">Affirmation</option>
                   <option value="other">Other (please specify)</option>
@@ -90,25 +90,25 @@
                   style="display: none"
                 />
               </div>
-              <div class="message-form-row">
-                <label for="messageText">Message Text:</label>
-                <input
-                  type="text"
-                  id="messageText"
-                  name="messageText"
-                  required
-                  placeholder="Enter your message here"
-                />
-              </div>
+            </div>
+            <div class="message-form-row">
+              <label for="messageText">Message Text:</label>
+              <input
+                type="text"
+                id="messageText"
+                name="messageText"
+                required
+                placeholder="Enter your message here"
+              />
+            </div>
 
-              <div class="message-form-row">
-                <div class="button-box">
-                  <button type="submit">Submit</button>
-                </div>
+            <div class="message-form-row">
+              <div class="button-box">
+                <button type="submit">Create Message</button>
               </div>
-            </fieldset>
-          </form>
-        </div>
+            </div>
+          </fieldset>
+        </form>
       </section>
 
       <button class="fab" id="addMessageButton">+</button>
