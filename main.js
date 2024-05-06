@@ -74,20 +74,19 @@ messageTypeSelect.addEventListener('change', function() {
 
 addMessageForm.addEventListener('submit', function(event) {
     event.preventDefault()
-
-    const messageType = document.getElementById('messageTypeSelect').value;
+    const messageTypeInput = document.getElementById('messageTypeSelect').value;
 
     let type;
-    if (messageType === 'other') {
-        const otherTypeInput = document.getElementById('otherType');
-        type = otherTypeInput.value;
+    if (messageTypeInput === 'other') {
+        const otherInput = document.getElementById('otherType');
+        type = otherInput.value;
     } else {
-        type = messageType;
+        type = messageTypeInput;
     }
 
-    const messageText = document.getElementById('messageText').value;
-
-    createMessage(type, messageText)
+    const messageTextInput = document.getElementById('messageText').value;
+    createMessage(type, messageTextInput)
+    showMessageDisplay()
 });
 
 // Helper Functions:
@@ -129,7 +128,22 @@ function clearMessage() {
     showIconDisplay()
 }
 
-function createMessage(type, message) {
-    console.log('message type:', type);
-    console.log('message:', message);
+function createMessage(typeInput, messageInput) {
+    var messageType = findMessageTypeFromInput(typeInput)
+    var messageObject = messageData[messageType]
+
+    messageObject.messages.push(messageInput)
+    currentMessage = messageInput;
+};
+
+function findMessageTypeFromInput(typeInput) {
+    for (let typeKey in messageData) {
+        let typeObj = messageData[typeKey];
+        if (typeObj.type === typeInput) {
+            return typeObj.type;
+        }
+    }
+
+    messageData[typeInput] = { type: typeInput, messages: [] };
+    return messageData[typeInput].type;
 }
