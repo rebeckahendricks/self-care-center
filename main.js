@@ -14,22 +14,34 @@ const clearButton = document.getElementById('clearButton');
 const addMessageButton = document.getElementById('addMessageButton');
 
 const messageTypeSelect = document.getElementById('messageTypeSelect');
+const messageTextInput = document.getElementById('messageTextInput');
 
 // Data:
 const messageData = {
     mantra: {
         type: "mantra",
+        displayValue: "Mantra",
         messages: ["Be present.", "Release resistance.", "Trust the journey.", "Stay grounded.", "Breathe deeply.", "Embrace change.", "Seek balance.", "Open your heart.", "Choose peace.", "Let go."]
     },
     affirmation: {
         type: "affirmation",
+        displayValue: "Affirmation",
         messages: ["I am enough.", "I believe in my skills.", "I am worthy of happiness.", "I embrace who I am.", "I am resilient.", "I deserve success.", "I am strong and confident.", "I grow with every challenge.", "I am grateful for today.", "I radiate positive energy."]
+    },
+    other: {
+        type: "other",
+        displayValue: "Other (Please specify)",
+        messages: [],
     }
 };
 
 var currentMessage;
 
 // Event Listeners:
+document.addEventListener('DOMContentLoaded', function() {
+    populateMessageTypeSelect();
+})
+
 radioButtons.forEach(button => {
     button.addEventListener('change', function() {
         if (this.checked) {
@@ -63,29 +75,22 @@ addMessageButton.addEventListener('click', function() {
 });
 
 messageTypeSelect.addEventListener('change', function() {
-    var otherTypeInput = document.getElementById('otherType');
-
     if (this.value === 'other') {
-        otherTypeInput.style.display = 'block';
+        hideOtherTypeInput(false)
     } else {
-        otherTypeInput.style.display = 'none';
+        hideOtherTypeInput(true);
     }
 });
 
 addMessageForm.addEventListener('submit', function(event) {
     event.preventDefault()
-    const messageTypeInput = document.getElementById('messageTypeSelect').value;
 
-    let type;
-    if (messageTypeInput === 'other') {
-        const otherInput = document.getElementById('otherType');
-        type = otherInput.value;
-    } else {
-        type = messageTypeInput;
-    }
+    var messageTypeInput = messageTypeSelect.value;
+    const [type, displayValue] = validateMessageType(messageTypeInput)
+    const text = messageTextInput.value; //TODO: text = validateMessageText(text) --> Error handle if text input is '' or too long.
 
-    const messageTextInput = document.getElementById('messageText').value;
-    createMessage(type, messageTextInput)
+    createMessage(type, displayValue, text)
+    resetForm(addMessageForm);
     showMessageDisplay()
 });
 
@@ -128,22 +133,55 @@ function clearMessage() {
     showIconDisplay()
 }
 
-function createMessage(typeInput, messageInput) {
-    var messageType = findMessageTypeFromInput(typeInput)
-    var messageObject = messageData[messageType]
-
-    messageObject.messages.push(messageInput)
-    currentMessage = messageInput;
+function createMessage(type, typeInput, text) {        
+    messageData[type] = { type: type, displayValue: typeInput, messages: [] }
+    messageData[type].messages.push(text)
+    
+    currentMessage = text;
 };
 
-function findMessageTypeFromInput(typeInput) {
-    for (let typeKey in messageData) {
-        let typeObj = messageData[typeKey];
-        if (typeObj.type === typeInput) {
-            return typeObj.type;
-        }
+function validateMessageType(typeInput) {
+    let displayValue;
+    if (typeInput === 'other') {
+        const otherInput = document.getElementById('otherType');
+        displayValue = otherInput.value;
+    } else {
+        displayValue = typeInput;
     }
 
-    messageData[typeInput] = { type: typeInput, messages: [] };
-    return messageData[typeInput].type;
+    searchType = displayValue.toLowerCase();
+    for (let typeKey in messageData) {
+        let messageObject = messageData[typeKey];
+        if (messageObject.type === searchType) {
+            return [messageObject.type, displayValue]
+        }
+    }
+    
+    return [searchType, displayValue]
+    // TODO: Add error handling for typeInput === '' or too long
+}
+
+function populateMessageTypeSelect() {
+    messageTypeSelect.innerHTML = '';
+    Object.values(messageData).forEach(typeObj => {
+        const option = document.createElement('option');
+        option.value = typeObj.type;
+        option.textContent = typeObj.displayValue;
+        messageTypeSelect.appendChild(option);
+    });
+}
+
+function resetForm() {
+    addMessageForm.reset();
+    hideOtherTypeInput(true);
+    populateMessageTypeSelect();
+}
+
+function hideOtherTypeInput(boolean) {
+    var otherTypeInput = document.getElementById('otherType');
+    if (otherTypeInput && boolean === true) {
+        otherTypeInput.classList.add('hidden');
+    } else if (otherTypeInput && boolean === false) {
+        otherTypeInput.classList.remove('hidden');
+    }
 }

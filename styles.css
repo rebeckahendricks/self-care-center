@@ -178,7 +178,7 @@ select {
   width: auto;
 }
 
-input[id="messageText"] {
+input[id="messageTextInput"] {
   width: 60%;
   min-width: 100px;
 }

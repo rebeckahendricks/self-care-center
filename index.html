@@ -77,26 +77,22 @@
             <div class="message-form-row">
               <label for="messageType">Message Type:</label>
               <div class="message-type-input">
-                <select id="messageTypeSelect" name="messageType">
-                  <option value="mantra">Mantra</option>
-                  <option value="affirmation">Affirmation</option>
-                  <option value="other">Other (please specify)</option>
-                </select>
+                <select id="messageTypeSelect" name="messageType"></select>
                 <input
                   type="text"
                   id="otherType"
                   name="otherType"
                   placeholder="Specify type"
-                  style="display: none"
+                  class="hidden"
                 />
               </div>
             </div>
             <div class="message-form-row">
-              <label for="messageText">Message Text:</label>
+              <label for="messageTextInput">Message Text:</label>
               <input
                 type="text"
-                id="messageText"
-                name="messageText"
+                id="messageTextInput"
+                name="messageTextInput"
                 required
                 placeholder="Enter your message here"
               />
