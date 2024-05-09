@@ -8,13 +8,14 @@ const addMessageDisplay = document.getElementById('add-message-display');
 const messageTypeForm = document.getElementById('message-type-form');
 const addMessageForm = document.getElementById('add-message-form')
 
-const radioButtons = document.querySelectorAll('input[name="message-type"]');
+let radioButtons = document.querySelectorAll('input[name="message-type"]');
 const submitButton = document.getElementById('submitButton');
 const clearButton = document.getElementById('clearButton');
 const addMessageButton = document.getElementById('addMessageButton');
 
 const messageTypeSelect = document.getElementById('messageTypeSelect');
 const messageTextInput = document.getElementById('messageTextInput');
+const radioButtonDiv = document.querySelector('.radio-buttons');
 
 // Data:
 const messageData = {
@@ -40,15 +41,8 @@ var currentMessage;
 // Event Listeners:
 document.addEventListener('DOMContentLoaded', function() {
     populateMessageTypeSelect();
+    populateRadioButtons();
 })
-
-radioButtons.forEach(button => {
-    button.addEventListener('change', function() {
-        if (this.checked) {
-            submitButton.disabled = false;
-        }
-    });
-});
 
 clearButton.addEventListener('click', function() {
     clearMessage()
@@ -123,6 +117,7 @@ function showAddMessageDisplay() {
 }
 
 function clearMessage() {
+    radioButtons = document.querySelectorAll('input[name="message-type"]');
     radioButtons.forEach(button => {
         button.checked = false;
     });
@@ -133,8 +128,10 @@ function clearMessage() {
     showIconDisplay()
 }
 
-function createMessage(type, typeInput, text) {        
-    messageData[type] = { type: type, displayValue: typeInput, messages: [] }
+function createMessage(type, typeInput, text) {   
+    if (!messageData[type]) {
+        messageData[type] = { type: type, displayValue: typeInput, messages: [] }
+    }    
     messageData[type].messages.push(text)
     
     currentMessage = text;
@@ -171,10 +168,42 @@ function populateMessageTypeSelect() {
     });
 }
 
+function populateRadioButtons() {
+    radioButtonDiv.innerHTML = '';
+    Object.values(messageData).forEach(typeObj => {
+        if (typeObj.type !== 'other') {
+            const label = document.createElement('label');
+            label.htmlFor = typeObj.type;
+            
+            const input = document.createElement('input');
+            input.type = 'radio';
+            input.id = typeObj.type;
+            input.name = 'message-type'
+            input.value = typeObj.type;
+    
+            label.appendChild(input);
+    
+            const text = document.createTextNode(typeObj.type);
+            label.appendChild(text);
+    
+            radioButtonDiv.appendChild(label);
+        }
+    });
+    radioButtons = document.querySelectorAll('input[name="message-type"]');
+    radioButtons.forEach(button => {
+        button.addEventListener('change', function() {
+            if (this.checked) {
+                submitButton.disabled = false;
+            }
+        });
+    });
+}
+
 function resetForm() {
     addMessageForm.reset();
     hideOtherTypeInput(true);
     populateMessageTypeSelect();
+    populateRadioButtons();
 }
 
 function hideOtherTypeInput(boolean) {

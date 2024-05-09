@@ -137,6 +137,8 @@ main {
 
 .radio-buttons label {
   font-style: italic;
+  overflow-wrap: break-word;
+  max-width: 90%;
 }
 
 .message-fieldset button {
