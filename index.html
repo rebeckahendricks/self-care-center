@@ -63,6 +63,7 @@
                   type="text"
                   id="otherType"
                   name="otherType"
+                  maxlength="20"
                   placeholder="Specify type"
                   class="hidden"
                 />
@@ -70,13 +71,14 @@
             </div>
             <div class="message-form-row">
               <label for="messageTextInput">Message Text:</label>
-              <input
-                type="text"
+              <textarea
                 id="messageTextInput"
                 name="messageTextInput"
+                maxlength="200"
                 required
                 placeholder="Enter your message here"
-              />
+                rows="3"
+              ></textarea>
             </div>
 
             <div class="message-form-row">

@@ -81,7 +81,7 @@ addMessageForm.addEventListener('submit', function(event) {
 
     var messageTypeInput = messageTypeSelect.value;
     const [type, displayValue] = validateMessageType(messageTypeInput)
-    const text = messageTextInput.value; //TODO: text = validateMessageText(text) --> Error handle if text input is '' or too long.
+    const text = messageTextInput.value;
 
     createMessage(type, displayValue, text)
     resetForm(addMessageForm);
@@ -210,7 +210,9 @@ function hideOtherTypeInput(boolean) {
     var otherTypeInput = document.getElementById('otherType');
     if (otherTypeInput && boolean === true) {
         otherTypeInput.classList.add('hidden');
+        otherTypeInput.required = false;
     } else if (otherTypeInput && boolean === false) {
         otherTypeInput.classList.remove('hidden');
+        otherTypeInput.required = true;
     }
 }
