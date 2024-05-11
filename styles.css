@@ -36,7 +36,8 @@ h1 {
   margin: 25px;
 }
 
-h2, h3 {
+h2,
+h3 {
   margin-top: 0px;
   margin-bottom: 10px;
   align-self: center;
@@ -101,10 +102,11 @@ main {
   width: 100%;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap
+  flex-wrap: wrap;
 }
 
-#clearButton, #submitButton {
+#clearButton,
+#submitButton {
   margin-left: 2px;
   margin-right: 2px;
 }
@@ -116,6 +118,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .message-fieldset,
@@ -227,4 +230,40 @@ textarea[id="messageTextInput"] {
 
 .fab:hover {
   background-color: #0056b3;
+}
+
+.favorite-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.favorite-button:focus,
+.favorite-btn:hover {
+  outline: none;
+}
+
+.heart-regular-icon,
+.heart-solid-icon {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.heart-solid-icon {
+  filter: brightness(0) saturate(100%) invert(26%) sepia(95%) saturate(6000%)
+    hue-rotate(346deg) brightness(100%) contrast(89%);
+}
+
+.heart-regular-icon {
+  filter: brightness(0) saturate(100%) invert(21%) sepia(57%) saturate(742%)
+    hue-rotate(174deg) brightness(91%) contrast(89%);
+}
+
+.favorite-button:active .heart-regular-icon,
+.heart-solid-icon {
+  transform: scale(0.9);
 }
