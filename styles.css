@@ -106,7 +106,9 @@ main {
 }
 
 #clearButton,
-#submitButton {
+#submitButton,
+#createMessage,
+#cancel {
   margin-left: 2px;
   margin-right: 2px;
 }
@@ -114,7 +116,7 @@ main {
 .message-container {
   max-width: 800px;
   min-width: 100px;
-  min-height: 170px;
+  min-height: 195px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -209,10 +211,16 @@ textarea[id="messageTextInput"] {
   white-space: nowrap;
 }
 
-.fab {
+.button-container {
   position: fixed;
-  bottom: 50px;
+  bottom: 20px;
   right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fab, .options-button {
   width: 56px;
   height: 56px;
   padding: 0;
@@ -225,11 +233,47 @@ textarea[id="messageTextInput"] {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   border: none;
   cursor: pointer;
+  margin-top: 10px;
   z-index: 1000;
 }
 
-.fab:hover {
+.options-button {
+  font-family: 'Arial', sans-serif;
+}
+
+.fab:hover, .options-button:hover {
   background-color: #0056b3;
+}
+
+.options-menu {
+  width: 150px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  padding: 10px 0;
+  position: absolute;
+  bottom: 60px;
+  right: -5px;
+  z-index: 1100;
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid #ccc; 
+}
+
+.options-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.options-menu ul li a {
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+}
+
+.options-menu ul li a:hover {
+  background-color: #f0f0f0;
 }
 
 .favorite-button {

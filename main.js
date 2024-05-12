@@ -12,7 +12,9 @@ let radioButtons = document.querySelectorAll('input[name="message-type"]');
 const submitButton = document.getElementById('submitButton');
 const clearButton = document.getElementById('clearButton');
 const addMessageButton = document.getElementById('addMessageButton');
+const cancelButton = document.getElementById('cancel');
 const favoriteButton = document.querySelector('.favorite-button');
+const optionsKebab = document.querySelector('.options-button');
 
 const heartRegularIcon = document.querySelector('.heart-regular-icon');
 const heartSolidIcon = document.querySelector('.heart-solid-icon');
@@ -22,7 +24,7 @@ const messageTextInput = document.getElementById('messageTextInput');
 const radioButtonDiv = document.querySelector('.radio-buttons');
 
 // Data:
-const messageData = {
+let messageData = {
     mantra: {
         type: "mantra",
         displayValue: "Mantra",
@@ -62,11 +64,14 @@ const messageData = {
     }
 };
 
-
 var currentMessage;
 
 // Event Listeners:
 document.addEventListener('DOMContentLoaded', function() {
+    loadData();
+    if (currentMessage) {
+        showMessageDisplay()
+    }
     populateMessageTypeSelect();
     populateRadioButtons();
 })
@@ -119,10 +124,21 @@ favoriteButton.addEventListener('click', function() {
     toggleFavorite()
 });
 
+optionsKebab.addEventListener('click', function() {
+    const optionsMenu = document.querySelector('.options-menu');
+    optionsMenu.classList.toggle('hidden');
+})
+
+cancelButton.addEventListener('click', function() {
+    showIconDisplay()
+    resetForm()
+})
+
 // Helper Functions:
 function randomizeCurrentMessage(messageArray) {
     const randomIndex = Math.floor(Math.random() * messageArray.length);
     currentMessage = messageArray[randomIndex];
+    saveData()
 }
 
 function showMessageDisplay() {
@@ -158,6 +174,7 @@ function clearMessage() {
     submitButton.disabled = true;
     clearButton.disabled = true;
 
+    saveData()
     showIconDisplay()
 }
 
@@ -165,9 +182,10 @@ function createMessage(type, typeInput, text) {
     if (!messageData[type]) {
         messageData[type] = { type: type, displayValue: typeInput, messages: [] }
     }    
-    messageData[type].messages.push({text: text, isFavorite: false})
+    currentMessage = {text: text, isFavorite: false}
+    messageData[type].messages.push(currentMessage)
     
-    currentMessage = text;
+    saveData()
 };
 
 function validateMessageType(typeInput) {
@@ -266,5 +284,28 @@ function toggleFavorite() {
     } else if (!currentMessage.isFavorite) {
         currentMessage.isFavorite = true;
         displayFavorite()
+    }
+    saveData()
+}
+
+function saveData() {
+    sessionStorage.setItem('messageData', JSON.stringify(messageData));
+    sessionStorage.setItem('currentMessage', JSON.stringify(currentMessage));
+}
+
+function loadData() {
+    var storedData = sessionStorage.getItem('messageData');
+    var storedCurrentMessage = sessionStorage.getItem('currentMessage');
+
+    if (storedData) {
+        messageData = JSON.parse(storedData);
+    } 
+
+    if (storedCurrentMessage) {
+        currentMessage = JSON.parse(storedCurrentMessage);
+    } 
+    
+    if (!storedData && !storedCurrentMessage) {
+        console.log('No data found in localStorage.');
     }
 }
