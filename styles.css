@@ -1,36 +1,39 @@
-/* font-family: 'Quicksand', sans-serif;
-COLORS
-light-yellow - #f7e4bf;
-light-blue - #78a7c6;
-dark-blue - #134d71;
-white - #ffffff;
-black - #000000;
-*/
+:root {
+  --primary-color: #134d71;
+  --secondary-color: #0056b3;
+  --text-color: #ffffff;
+  --background-color: #f0f0f0;
+  --highlight-color: #f7e4bf;
+  --font-family-default: "Quicksand", sans-serif;
+  --button-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
 
+/* Base element styles */
 *,
 *:before,
 *:after {
   box-sizing: border-box;
-  font-family: "Quicksand", sans-serif;
+  font-family: var(--font-family-default);
   text-align: center;
 }
 
+body,
 html {
-  background: linear-gradient(to bottom, #134d71, #f7e4bf);
+  background: linear-gradient(
+    to bottom,
+    var(--primary-color),
+    var(--highlight-color)
+  );
   min-height: 100vh;
   margin: 0;
   padding: 0;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-}
-
+/* Typography */
 h1,
 h2,
 h3 {
-  color: #ffffff;
+  color: var(--text-color);
 }
 
 h1 {
@@ -41,11 +44,11 @@ h2,
 h3 {
   margin-top: 0px;
   margin-bottom: 10px;
-  align-self: center;
 }
 
-.add-message-title {
-  color: #134d71;
+.add-message-title,
+.message-text-card {
+  color: var(--primary-color);
 }
 
 .message-text {
@@ -55,44 +58,28 @@ h3 {
   overflow-wrap: break-word;
 }
 
-main {
-  min-height: calc(100vh - 40px);
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding-bottom: 25px;
+.message-text-card {
+  width: 100%;
+  font-size: 24px;
+  padding: 20px 5px;
+  margin: 0px;
+  overflow-wrap: break-word;
 }
 
-.message-section {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-}
-
-#message-type-fieldset {
-  max-width: 600px;
-}
-
-#add-message-fieldset {
-  padding: 10px 0 0 0;
-  max-width: 800px;
-}
-
-.form {
-  flex: 1;
-}
-
+/* Form styling */
+.form,
 .message-fieldset {
-  border: none;
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  border: none;
 }
 
+.button-box,
 .message-form-row {
-  margin: 5px 0px;
+  margin: 5px 0;
   width: 70%;
   display: flex;
   flex-wrap: wrap;
@@ -100,37 +87,68 @@ main {
 }
 
 .button-box {
-  margin: 5px 0px;
   width: 100%;
-  display: flex;
   justify-content: center;
-  flex-wrap: wrap;
 }
 
-#clearButton,
-#submitButton,
-#createMessage,
-#cancel {
-  margin-left: 2px;
-  margin-right: 2px;
+/* Main Layout and Sections */
+main {
+  min-height: calc(100vh - 40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-bottom: 25px;
+}
+
+.message-section {
+  padding: 10px;
+}
+
+#message-type-fieldset,
+#add-message-fieldset {
+  padding-top: 10px;
+}
+
+#message-type-fieldset {
+  max-width: 600px;
+}
+
+#add-message-fieldset {
+  max-width: 800px;
+}
+
+.message-fieldset,
+.message-container {
+  color: #000000;
+  background: #ffffff;
+  border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 10px;
+  padding-bottom: 0;
+}
+
+/* Message Cards */
+.message-container,
+.message-category,
+.message-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .message-container {
   max-width: 800px;
   min-width: 100px;
   min-height: 195px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
 }
 
 .message-category {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
   padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .message-card {
@@ -138,12 +156,9 @@ main {
   max-width: 400px;
   min-width: 250px;
   min-height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
   color: #000000;
-  background: #ffffff;
+  background: var(--background-color);
   border-radius: 8px;
   margin: 5px;
   padding-top: 10px;
@@ -152,7 +167,8 @@ main {
   cursor: grab;
 }
 
-.message-card:active, .message-card:focus {
+.message-card:active,
+.message-card:focus {
   cursor: grabbing;
   opacity: 0.8;
 }
@@ -170,103 +186,7 @@ main {
   transition: all 0.3s ease;
 }
 
-
-.message-text-card {
-  width: 100%;
-  font-size: 24px;
-  padding: 20px 5px;
-  margin: 0px;
-  overflow-wrap: break-word;
-}
-
-.message-fieldset,
-.message-container {
-  color: #000000;
-  background: #ffffff;
-  border-radius: 8px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 10px;
-  padding-bottom: 0;
-}
-
-.radio-buttons {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.radio-buttons label {
-  font-style: italic;
-  overflow-wrap: break-word;
-  max-width: 90%;
-}
-
-.message-fieldset button {
-  background-color: #78a7c6;
-  color: #000000;
-  border: none;
-  padding: 3px 10px;
-  border-radius: 5px;
-  cursor: not-allowed;
-  transition: background-color 0.3s, color 0.3s;
-  margin: 5px 0;
-  font-weight: 500;
-  font-size: medium;
-}
-
-.message-fieldset button:enabled:hover {
-  background-color: #002244;
-}
-
-.message-fieldset button:enabled {
-  background-color: #134d71;
-  color: #ffffff;
-  cursor: pointer;
-}
-
-.message-type-input {
-  display: flex;
-  width: 60%;
-  flex-wrap: wrap;
-}
-
-.message-type-input > * {
-  flex: 1 1 auto;
-  min-width: 100%;
-}
-
-select {
-  display: block;
-  width: auto;
-}
-
-textarea[id="messageTextInput"] {
-  width: 60%;
-  min-width: 100px;
-}
-
-.meditation-icon {
-  width: 65px;
-  margin: 30px auto;
-}
-
-.hidden {
-  display: none;
-}
-
-.legend-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-  white-space: nowrap;
-}
-
+/* Buttons and Interactions */
 .button-container {
   position: fixed;
   bottom: 20px;
@@ -276,7 +196,8 @@ textarea[id="messageTextInput"] {
   align-items: center;
 }
 
-.fab, .options-button {
+.fab,
+.options-button {
   width: 56px;
   height: 56px;
   padding: 0;
@@ -293,17 +214,9 @@ textarea[id="messageTextInput"] {
   z-index: 1000;
 }
 
-.options-button {
-  font-family: 'Arial', sans-serif;
-}
-
-.fab:hover, .options-button:hover {
-  background-color: #0056b3;
-}
-
 .options-menu {
   width: 150px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   padding: 10px 0;
   position: absolute;
@@ -311,7 +224,16 @@ textarea[id="messageTextInput"] {
   right: -5px;
   z-index: 1100;
   background-color: rgba(255, 255, 255, 0.95);
-  border: 1px solid #ccc; 
+  border: 1px solid #ccc;
+}
+
+.options-button {
+  font-family: "Arial", sans-serif;
+}
+
+.fab:hover,
+.options-button:hover {
+  background-color: #0056b3;
 }
 
 .options-menu ul {
@@ -346,6 +268,84 @@ textarea[id="messageTextInput"] {
   outline: none;
 }
 
+.favorite-button:active .heart-regular-icon,
+.favorite-button:active .heart-solid-icon {
+  transform: scale(0.9);
+}
+
+/* Form Buttons */
+#clearButton,
+#submitButton,
+#createMessage,
+#cancel {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.message-fieldset button {
+  background-color: #78a7c6;
+  color: #000000;
+  border: none;
+  padding: 3px 10px;
+  border-radius: 5px;
+  cursor: not-allowed;
+  transition: background-color 0.3s, color 0.3s;
+  margin: 5px 0;
+  font-weight: 500;
+  font-size: medium;
+}
+
+.message-fieldset button:enabled:hover {
+  background-color: #002244;
+}
+
+.message-fieldset button:enabled {
+  background-color: #134d71;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* Radio Button Styles */
+.radio-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.radio-buttons label {
+  font-style: italic;
+  overflow-wrap: break-word;
+  max-width: 90%;
+}
+
+/* Form Styles & Validation */
+.message-type-input {
+  display: flex;
+  width: 60%;
+  flex-wrap: wrap;
+}
+
+.message-type-input > * {
+  flex: 1 1 auto;
+  min-width: 100%;
+}
+
+select {
+  display: block;
+  width: auto;
+}
+
+textarea[id="messageTextInput"] {
+  width: 60%;
+  min-width: 100px;
+}
+
+/* Icon & SVG Styling */
+.meditation-icon {
+  width: 65px;
+  margin: 30px auto;
+}
+
 .heart-regular-icon,
 .heart-solid-icon {
   width: 24px;
@@ -363,16 +363,19 @@ textarea[id="messageTextInput"] {
     hue-rotate(174deg) brightness(91%) contrast(89%);
 }
 
-.favorite-button:active .heart-regular-icon,
-.heart-solid-icon {
-  transform: scale(0.9);
+/* Utility classes */
+.hidden {
+  display: none;
 }
 
-.message-category {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.message-category h3 {
-  padding-left: 10px;
+.legend-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
 }
