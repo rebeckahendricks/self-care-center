@@ -28,7 +28,8 @@ body {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   color: #ffffff;
 }
 
@@ -43,7 +44,7 @@ h3 {
   align-self: center;
 }
 
-h3 {
+.add-message-title {
   color: #134d71;
 }
 
@@ -51,6 +52,7 @@ h3 {
   font-size: 30px;
   padding-bottom: 10px;
   margin: 0px;
+  overflow-wrap: break-word;
 }
 
 main {
@@ -121,6 +123,60 @@ main {
   align-items: center;
   justify-content: center;
   position: relative;
+}
+
+.message-category {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px;
+}
+
+.message-card {
+  flex: 1 1 200px;
+  max-width: 400px;
+  min-width: 250px;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: #000000;
+  background: #ffffff;
+  border-radius: 8px;
+  margin: 5px;
+  padding-top: 10px;
+  padding-bottom: 0;
+  transition: transform 0.3s ease;
+  cursor: grab;
+}
+
+.message-card:active, .message-card:focus {
+  cursor: grabbing;
+  opacity: 0.8;
+}
+
+.message-card.dragging {
+  opacity: 0.5;
+  cursor: grabbing;
+}
+
+.placeholder {
+  border: 2px dashed #000000;
+  margin: 5px;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  transition: all 0.3s ease;
+}
+
+
+.message-text-card {
+  width: 100%;
+  font-size: 24px;
+  padding: 20px 5px;
+  margin: 0px;
+  overflow-wrap: break-word;
 }
 
 .message-fieldset,
@@ -310,4 +366,13 @@ textarea[id="messageTextInput"] {
 .favorite-button:active .heart-regular-icon,
 .heart-solid-icon {
   transform: scale(0.9);
+}
+
+.message-category {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.message-category h3 {
+  padding-left: 10px;
 }

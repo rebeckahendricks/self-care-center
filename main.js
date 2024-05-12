@@ -29,32 +29,40 @@ let messageData = {
         type: "mantra",
         displayValue: "Mantra",
         messages: [
-            { text: "Be present.", isFavorite: false },
-            { text: "Release resistance.", isFavorite: false },
-            { text: "Trust the journey.", isFavorite: false },
-            { text: "Stay grounded.", isFavorite: false },
-            { text: "Breathe deeply.", isFavorite: false },
-            { text: "Embrace change.", isFavorite: false },
-            { text: "Seek balance.", isFavorite: false },
-            { text: "Open your heart.", isFavorite: false },
-            { text: "Choose peace.", isFavorite: false },
-            { text: "Let go.", isFavorite: false }
+            { text: "Breathing in, I send myself love. Breathing out, I send love to someone else who needs it.", isFavorite: false },
+            { text: "Don’t let yesterday take up too much of today.", isFavorite: false },
+            { text: "Every day is a second chance.", isFavorite: false },
+            { text: "Tell the truth and love everyone.", isFavorite: false },
+            { text: "I am free from sadness.", isFavorite: false },
+            { text: "I am enough.", isFavorite: false },
+            { text: "In the beginning it is you, in the middle it is you and in the end it is you.", isFavorite: false },
+            { text: "I love myself.", isFavorite: false },
+            { text: "I am present now.", isFavorite: false },
+            { text: "Inhale the future, exhale the past.", isFavorite: false },
+            { text: "This too shall pass.", isFavorite: false },
+            { text: "Yesterday is not today.", isFavorite: false },
+            { text: "The only constant is change.", isFavorite: false },
+            { text: "Onward and upward.", isFavorite: false },
+            { text: "I am the sky, the rest is weather.", isFavorite: false }
         ]
     },
     affirmation: {
         type: "affirmation",
         displayValue: "Affirmation",
         messages: [
+            { text: "I forgive myself and set myself free.", isFavorite: false },
+            { text: "I believe I can be all that I want to be.", isFavorite: false },
+            { text: "I am in the process of becoming the best version of myself.", isFavorite: false },
+            { text: "I have the freedom & power to create the life I desire.", isFavorite: false },
+            { text: "I choose to be kind to myself and love myself unconditionally.", isFavorite: false },
+            { text: "My possibilities are endless.", isFavorite: false },
+            { text: "I am worthy of my dreams.", isFavorite: false },
             { text: "I am enough.", isFavorite: false },
-            { text: "I believe in my skills.", isFavorite: false },
-            { text: "I am worthy of happiness.", isFavorite: false },
-            { text: "I embrace who I am.", isFavorite: false },
-            { text: "I am resilient.", isFavorite: false },
-            { text: "I deserve success.", isFavorite: false },
-            { text: "I am strong and confident.", isFavorite: false },
-            { text: "I grow with every challenge.", isFavorite: false },
-            { text: "I am grateful for today.", isFavorite: false },
-            { text: "I radiate positive energy.", isFavorite: false }
+            { text: "I deserve to be healthy and feel good.", isFavorite: false },
+            { text: "I am full of energy and vitality and my mind is calm and peaceful.", isFavorite: false },
+            { text: "Every day I am getting healthier and stronger.", isFavorite: false },
+            { text: "I honor my body by trusting the signals that it sends me.", isFavorite: false },
+            { text: "I manifest perfect health by making smart choices.", isFavorite: false }
         ]
     },
     other: {
@@ -68,6 +76,10 @@ var currentMessage;
 
 // Event Listeners:
 document.addEventListener('DOMContentLoaded', function() {
+    var storedData = sessionStorage.getItem('messageData');
+    if (!storedData) {
+        saveData();
+    }
     loadData();
     if (currentMessage) {
         showMessageDisplay()
@@ -278,19 +290,16 @@ function displayFavorite() {
 }
 
 function toggleFavorite() {
-    if (currentMessage.isFavorite) {
-        currentMessage.isFavorite = false;
-        displayFavorite()
-    } else if (!currentMessage.isFavorite) {
-        currentMessage.isFavorite = true;
-        displayFavorite()
-    }
+    currentMessage.isFavorite = !currentMessage.isFavorite
+    displayFavorite()
     saveData()
 }
 
 function saveData() {
     sessionStorage.setItem('messageData', JSON.stringify(messageData));
-    sessionStorage.setItem('currentMessage', JSON.stringify(currentMessage));
+    if (currentMessage) {
+        sessionStorage.setItem('currentMessage', JSON.stringify(currentMessage));
+    }
 }
 
 function loadData() {
