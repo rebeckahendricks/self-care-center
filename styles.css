@@ -66,6 +66,10 @@ h3 {
   overflow-wrap: break-word;
 }
 
+.no-favorites-message {
+  font-style: italic;
+}
+
 /* Form styling */
 .form,
 .message-fieldset {
@@ -254,22 +258,32 @@ main {
   background-color: #f0f0f0;
 }
 
-.favorite-button {
+.favorite-button, .delete-button {
   position: absolute;
   top: 5px;
-  right: 5px;
   border: none;
   background: none;
   cursor: pointer;
 }
 
+.favorite-button {
+  right: 5px;
+}
+
+.delete-button {
+  left: 5px;
+}
+
 .favorite-button:focus,
-.favorite-btn:hover {
+.favorite-button:hover,
+.delete-button:focus,
+.delete-button:hover {
   outline: none;
 }
 
 .favorite-button:active .heart-regular-icon,
-.favorite-button:active .heart-solid-icon {
+.favorite-button:active .heart-solid-icon,
+.delete-button:active .trash-solid-icon {
   transform: scale(0.9);
 }
 
@@ -358,9 +372,15 @@ textarea[id="messageTextInput"] {
     hue-rotate(346deg) brightness(100%) contrast(89%);
 }
 
-.heart-regular-icon {
+.heart-regular-icon, .trash-solid-icon {
   filter: brightness(0) saturate(100%) invert(21%) sepia(57%) saturate(742%)
     hue-rotate(174deg) brightness(91%) contrast(89%);
+}
+
+.trash-solid-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
 }
 
 /* Utility classes */

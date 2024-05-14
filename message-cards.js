@@ -18,8 +18,7 @@ cardContainer.addEventListener("dragover", handleDragOver, false);
 cardContainer.addEventListener("drop", handleDrop, false);
 
 optionsKebab.addEventListener("click", function () {
-  const optionsMenu = document.querySelector(".options-menu");
-  optionsMenu.classList.toggle("hidden");
+    toggleOptionsKebab();
 });
 
 // Helper Functions
@@ -30,7 +29,7 @@ function displayMessages() {
       categoryContainer.id = `${type}-messages`;
       categoryContainer.className = "message-category";
 
-      const categoryTitle = document.createElement("h3");
+      const categoryTitle = document.createElement("h2");
       categoryTitle.textContent = messageData[type].displayValue;
 
       cardContainer.appendChild(categoryTitle);
@@ -43,6 +42,7 @@ function displayMessages() {
           card.draggable = true;
           card.setAttribute("data-id", `${type}-${index}`);
 
+          // Create Favorite Buttons
           const favoriteButton = document.createElement("button");
           favoriteButton.className = "favorite-button";
           favoriteButton.setAttribute("aria-label", "Add to favorites");
@@ -60,11 +60,24 @@ function displayMessages() {
             updateFavoriteIcon(favoriteButton, message.isFavorite);
           };
 
+          // Create Delete Buttons
+          const deleteButton = document.createElement("button");
+          deleteButton.className = "delete-button";
+          deleteButton.setAttribute("aria-label", "Delete Message");
+          deleteButton.setAttribute("title", "Delete Message");
+
+          deleteButton.innerHTML = `<img class="trash-solid-icon" src="./assets/trash-solid.svg" alt="Delete">`
+
+          deleteButton.onclick = function () {
+            deleteMessage(message, card);
+          }
+
           const messageText = document.createElement("p");
           messageText.className = "message-text-card";
           messageText.textContent = message.text;
 
           card.appendChild(favoriteButton);
+          card.appendChild(deleteButton);
           card.appendChild(messageText);
           categoryContainer.appendChild(card);
 
@@ -72,6 +85,8 @@ function displayMessages() {
           card.addEventListener("dragend", handleDragEnd, false);
         }
       });
+
+      handleNoFavorites(categoryContainer, categoryTitle);
     }
   });
 }
@@ -130,6 +145,11 @@ function handleDragEnd(_e) {
   this.style.opacity = "";
 }
 
+function toggleOptionsKebab() {
+    const optionsMenu = document.querySelector(".options-menu");
+    optionsMenu.classList.toggle("hidden");
+  }
+
 function toggleFavorite(type, index) {
   const message = messageData[type].messages[index];
   message.isFavorite = !message.isFavorite;
@@ -139,6 +159,18 @@ function toggleFavorite(type, index) {
   }
 
   saveData();
+  removeUnfavorited(type, index, message);
+}
+
+function removeUnfavorited(type, index, message) {
+  if (!message.isFavorite && isFavoritesView) {
+    const unfavoritedCard = document.querySelector(
+      `[data-id="${type}-${index}"]`
+    );
+    if (unfavoritedCard) {
+      unfavoritedCard.remove();
+    }
+  }
 }
 
 function updateFavoriteIcon(button, isFavorite) {
@@ -148,6 +180,36 @@ function updateFavoriteIcon(button, isFavorite) {
   regularIcon.classList.toggle("hidden", isFavorite);
   solidIcon.classList.toggle("hidden", !isFavorite);
 }
+
+function handleNoFavorites(categoryContainer, categoryTitle) {
+  if (categoryContainer.children.length === 0) {
+    const messageElement = document.createElement("p");
+    const noFavoritesMessage = `"${categoryTitle.innerText}" has no favorites.`;
+
+    messageElement.textContent = noFavoritesMessage;
+    messageElement.className = "no-favorites-message";
+
+    categoryContainer.appendChild(messageElement);
+  }
+}
+
+function deleteMessage(selectedMessage, card) {
+    for (const category in messageData) {
+      const messages = messageData[category].messages;
+      const index = messages.findIndex(
+        (message) => message.text === selectedMessage.text
+      );
+      if (index !== -1) {
+        messages.splice(index, 1);
+        console.log("Message removed:", selectedMessage);
+        break;
+      }
+    }
+
+    card.remove();
+    saveData();
+    console.log('messageData', messageData);
+  }
 
 function saveData() {
   sessionStorage.setItem("messageData", JSON.stringify(messageData));

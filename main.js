@@ -14,6 +14,7 @@ const clearButton = document.getElementById("clearButton");
 const addMessageButton = document.getElementById("addMessageButton");
 const cancelButton = document.getElementById("cancel");
 const favoriteButton = document.querySelector(".favorite-button");
+const deleteButton = document.querySelector(".delete-button");
 const optionsKebab = document.querySelector(".options-button");
 
 const heartRegularIcon = document.querySelector(".heart-regular-icon");
@@ -147,7 +148,7 @@ addMessageForm.addEventListener("submit", function (event) {
   const text = messageTextInput.value;
 
   createMessage(type, displayValue, text);
-  resetForm(addMessageForm);
+  resetForm();
   showMessageDisplay();
 });
 
@@ -162,6 +163,11 @@ optionsKebab.addEventListener("click", function () {
 cancelButton.addEventListener("click", function () {
   showIconDisplay();
   resetForm();
+});
+
+deleteButton.addEventListener("click", function () {
+  deleteMessage();
+  clearMessage();
 });
 
 // Helper Functions:
@@ -317,6 +323,20 @@ function toggleFavorite() {
 function toggleOptionsKebab() {
   const optionsMenu = document.querySelector(".options-menu");
   optionsMenu.classList.toggle("hidden");
+}
+
+function deleteMessage() {
+  for (const category in messageData) {
+    const messages = messageData[category].messages;
+    const index = messages.findIndex(
+      (message) => message.text === currentMessage.text
+    );
+    if (index !== -1) {
+      messages.splice(index, 1);
+      console.log("Message removed:", currentMessage);
+      break;
+    }
+  }
 }
 
 function saveData() {
